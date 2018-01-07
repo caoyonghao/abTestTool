@@ -2,7 +2,7 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 const path = require('path');
 
-const _apacheBench = './Apache24/bin/abs';
+const _apacheBench = 'ab';
 const _abArgs = ['-c', '100', '-n', '100'];
 start();
 
@@ -33,13 +33,16 @@ function readConfig() {
 }
 
 function makeTasks(config) {
+  const timeNow = new Date().getTime() + '';
   const tasks = [];
+  const outputPath = path.resolve(config.output, timeNow);
+  fs.mkdirSync(outputPath);
   for (const serverKey in config.target) {
     for (const protocolKey in config.target[serverKey]) {
       config.resource.forEach((el, idx) => {
         const taskObj = {}, protocolObj = config.target[serverKey][protocolKey];
         taskObj.name = serverKey + '-' + protocolKey + '-' + el.split('.')[0];
-        taskObj.file = path.resolve(config.output, taskObj.name + '.log');
+        taskObj.file = path.resolve(outputPath, taskObj.name + '.log');
         taskObj.url = protocolKey + '://' + protocolObj + el;
         tasks.push(taskObj);
       })
@@ -56,11 +59,9 @@ function taskRunner(tasks) {
   const nextTask = tasks.shift();
   const args = deepClone(_abArgs);
   args.push(nextTask.url);
-  console.log(args);
   exec(_apacheBench, args, {
     success: (data) => {
       fs.writeFile(nextTask.file, data);
-      console.log('' + data);
       taskRunner(tasks);
     },
     fail: (data) => {
