@@ -2,8 +2,8 @@ const spawn = require('child_process').spawn;
 const fs = require('fs');
 const path = require('path');
 
-const _apacheBench = 'ab';
-const _abArgs = ['-c', '100', '-n', '100', 'http://www.baidu.com'];
+const _apacheBench = './Apache24/bin/abs';
+const _abArgs = ['-c', '100', '-n', '100'];
 start();
 
 function deepClone(obj) {
@@ -39,6 +39,7 @@ function makeTasks(config) {
       config.resource.forEach((el, idx) => {
         const taskObj = {}, protocolObj = config.target[serverKey][protocolKey];
         taskObj.name = serverKey + '-' + protocolKey + '-' + el.split('.')[0];
+        taskObj.file = path.resolve(config.output, taskObj.name + '.log');
         taskObj.url = protocolKey + '://' + protocolObj + el;
         tasks.push(taskObj);
       })
@@ -55,12 +56,14 @@ function taskRunner(tasks) {
   const nextTask = tasks.shift();
   const args = deepClone(_abArgs);
   args.push(nextTask.url);
+  console.log(args);
   exec(_apacheBench, args, {
-    success: (data) => {
-
+    success: (data, task) => {
+      // fs.writeFile(task.file, data);
+      console.log(data)
     },
     fail: (data) => {
-
+      console.log('fail' + data);
     },
     exit: (data) => {
       taskRunner(tasks);
@@ -74,9 +77,9 @@ function start() {
    const tasks = makeTasks(config);
    taskRunner(tasks);
 
-  //  exec(_apacheBench, _abArgs, {
-  //    success: function(data) {console.log('success' + data)},
-  //    error: function(data) {console.log('error' + data)},
-  //    exit: function(data) {console.log('exit' + data)},
-  //  })
+    // exec(_apacheBench, _abArgs, {
+    //   success: function(data) {console.log('success' + data)},
+    //   error: function(data) {console.log('error' + data)},
+    //   exit: function(data) {console.log('exit' + data)},
+    // })
 }
