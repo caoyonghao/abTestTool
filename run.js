@@ -49,7 +49,7 @@ function makeTasks(config) {
 }
 
 function taskRunner(tasks) {
-  if (!tasks) {
+  if (!tasks || tasks.length < 1) {
     return;
   }
 
@@ -58,15 +58,17 @@ function taskRunner(tasks) {
   args.push(nextTask.url);
   console.log(args);
   exec(_apacheBench, args, {
-    success: (data, task) => {
-      // fs.writeFile(task.file, data);
-      console.log(data)
+    success: (data) => {
+      fs.writeFile(nextTask.file, data);
+      console.log('' + data);
+      taskRunner(tasks);
     },
     fail: (data) => {
       console.log('fail' + data);
     },
     exit: (data) => {
-      taskRunner(tasks);
+      console.log('process exit')
+      // taskRunner(tasks);
     }
   })
 }
