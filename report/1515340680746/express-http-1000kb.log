@@ -1,0 +1,38 @@
+..done
+
+
+Server Software:        
+Server Hostname:        192.168.0.104
+Server Port:            3000
+
+Document Path:          /1000kb.html
+Document Length:        0 bytes
+
+Concurrency Level:      100
+Time taken for tests:   2.394 seconds
+Complete requests:      100
+Failed requests:        0
+Total transferred:      28400 bytes
+HTML transferred:       0 bytes
+Requests per second:    41.77 [#/sec] (mean)
+Time per request:       2393.893 [ms] (mean)
+Time per request:       23.939 [ms] (mean, across all concurrent requests)
+Transfer rate:          11.59 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        3   61  95.9     26     362
+Processing:     6   86 119.6     37     520
+Waiting:        6   82 112.7     37     520
+Total:         14  147 201.9     65     881
+
+Percentage of the requests served within a certain time (ms)
+  50%     65
+  66%     90
+  75%    111
+  80%    165
+  90%    518
+  95%    611
+  98%    881
+  99%    881
+ 100%    881 (longest request)

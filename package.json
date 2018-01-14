@@ -1,0 +1,16 @@
+{
+  "name": "abTestTool",
+  "version": "1.0.3",
+  "description": "ab test tool",
+  "main": "run.js",
+  "scripts": {
+    "run": "node run.js",
+    "genarate": "node genarateReport"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {},
+  "dependencies": {
+    "csv": "^2.0.0"
+  }
+}

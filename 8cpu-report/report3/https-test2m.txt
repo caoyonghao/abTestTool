@@ -1,0 +1,44 @@
+This is ApacheBench, Version 2.3 <$Revision: 1430300 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.1.128 (be patient)
+
+
+Server Software:        nginx
+Server Hostname:        192.168.1.128
+Server Port:            443
+SSL/TLS Protocol:       TLSv1.2,ECDHE-RSA-AES256-GCM-SHA384,1024,256
+
+Document Path:          /test2m.html
+Document Length:        2171223 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   66.443 seconds
+Complete requests:      1000
+Failed requests:        0
+Write errors:           0
+Total transferred:      2171479000 bytes
+HTML transferred:       2171223000 bytes
+Requests per second:    15.05 [#/sec] (mean)
+Time per request:       66443.326 [ms] (mean)
+Time per request:       66.443 [ms] (mean, across all concurrent requests)
+Transfer rate:          31915.70 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:       73  733 483.9    568    3667
+Processing:  3030 52816 14619.3  58950   66095
+Waiting:       20  784 777.5    509    3742
+Total:       3935 53549 14605.3  59737   66334
+
+Percentage of the requests served within a certain time (ms)
+  50%  59737
+  66%  62893
+  75%  64100
+  80%  64534
+  90%  65659
+  95%  66069
+  98%  66239
+  99%  66298
+ 100%  66334 (longest request)
