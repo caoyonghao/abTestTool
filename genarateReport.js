@@ -59,8 +59,8 @@ const merge = (content) => {
   let head = ['type'];
 
   for (let i = 0; i < headLength / _targetArray.length; i++) {
-    head = head.concat(head, _targetArray);
-    console.log(head)
+    console.log(head.length);
+    head = head.concat(_targetArray);
   }
 
   data.push(head);
